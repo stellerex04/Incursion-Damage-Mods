@@ -16,7 +16,7 @@ if len(sys.argv) > 1:
 else:
     Files = MODS
 
-ChuckCount = 0
+chunkcount = 0
 
 for Output in Files:
     combination_data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
@@ -24,11 +24,9 @@ for Output in Files:
     
     if "Flag1" in combination_data.columns:
         combination_data = combination_data[combination_data["Flag1"] != "A"]
-
     if "Flag2" in combination_data.columns:
         combination_data = combination_data[combination_data["Flag2"] != "A"]
-
-    print("combination_data cleaned")
+    print("webcrawl data cleaned")
 
     filepath = "./sets/"+ Output[0] +"_sets.csv"
     
@@ -37,17 +35,16 @@ for Output in Files:
         print("Old file removed")
     else:
         print("The file does not exist") 
-    combination_data = combination_data[(combination_data["DPS"] >= 26)]
 
-    combination_data_list = list(combination_data["ID"])
+    data = combination_data[(combination_data["DPS"] >= 26)]
+    combination_data_list = list(data["ID"])
     combination_data_list = combination_data_list
     print("combination_data list created")
     combination_data_list2 = list(combinations(combination_data_list, (4)))
         
     size = 3000000
     chunked_list = list(chunked(combination_data_list2, size))
-    data = combination_data
-
+    print(f"chunked_list size: {size}")
     data["Damage"] = data["Damage"].astype(float)
     data["ROF"] = data["ROF"].astype(float)
     data["Unit"] = data["Unit"].fillna("plex")
@@ -56,7 +53,7 @@ for Output in Files:
 
     data = data[["ID", "CPU", 'Damage', 'ROF', "DPS", "Contract"]]
 
-    ChuckCount = 0
+    chunkcount = 0
     
     for chunk in chunked_list:
         df = pd.DataFrame(chunk)
@@ -83,20 +80,20 @@ for Output in Files:
         data3["TotalCPU"] = data3["CPU_first"] + data3["CPU_second"] + data3["CPU_third"] + data3["CPU_fourth"] 
         
         if Output[1] == "Market HeatSinks":       
-            #Paladin Requirements [3.08] Damage [33] 
+            # Paladin
             report2 = data3[(data3["TotalDamage"] >= 3.0784) & (data3["TotalROF"] >= 33.11)].copy()
         elif Output[1] == "Market GyroStabs": 
-            #vargur Requirements [3.08] Damage [33] 
+            # Vargur 
             report2 = data3[(data3["TotalDamage"] >= 3.0784) & (data3["TotalROF"] >= 33.11)].copy()
         elif Output[1] == "Market MagStabs": 
-            # kronos requirements damage 3.9 and rof 40
+            # Kronos
             report2 = data3[(data3["TotalDamage"] >= 3.093192) & (data3["TotalROF"] >= 31.23)].copy()
         
         report3 = report2[[0,1,2,3,"TotalDamage","TotalROF", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]]       
   
         report3.to_csv(filepath, mode='a', index=False, header=False)
-        ChuckCount = ChuckCount+1
-        print("Chuck " + str(ChuckCount) + " Saved")    
+        chunkcount = chunkcount+1
+        print(f"{Output[0]} chunk" + str(chunkcount) + " saved.")    
         
-    print("All Chucks Saved")
+    print(f"All {Output[0]} chunks saved.")
     

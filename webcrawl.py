@@ -19,11 +19,6 @@ options.add_argument("--disable-extensions")
 options.add_argument('--disable-blink-features=AutomationControlled')
 
 
-# LinkData = [['HeatSink', 'https://mutaplasmid.space/type/49726/contracts/'], 
-#             ['MagStab', 'https://mutaplasmid.space/type/49722/contracts/'], 
-#             ["GyroStab","https://mutaplasmid.space/type/49730/contracts/"]]
-
-
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
         URLs = [MODS[0]]
@@ -136,7 +131,7 @@ for URL in URLs:
             htmldf2 = htmldf2[htmldf2["ID"].notna()]
 
             htmldf2.to_csv("./webcrawler/" + str(URL[0]) + "Output.csv",index=False)
-            print(str(URL[0]) + "Saved")
+            print(f"{URL[0]} Saved")
             
             t = datetime.datetime.now()
             timestamp = t.strftime("[%d.%m.%y] Time - %H_%M_%S")
@@ -145,7 +140,7 @@ for URL in URLs:
             with open('./log/' + str(URL[0]) + '.txt','a') as file:
                 file.write(log_msg + "\n")
 
-            print(str(URL[0]) + " Log Updated")
+            print(f"{URL[0]} Log Updated")
             success = True
 
         except Exception as e:
@@ -153,7 +148,7 @@ for URL in URLs:
             attempts += 1
             print(f"Attempt:{attempts}")
             if attempts >= 3:
-                print(str(URL[0]) + " Failed")
+                print(f"{URL[0]} Failed")
                 break
 
 

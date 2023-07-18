@@ -13,12 +13,15 @@ if len(sys.argv) > 1:
 else:
     Files = MODS
 
-ChuckCount = 0
-
 for Output in Files:
     data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
     data = data.drop_duplicates(keep="first")
-    print("combination_data cleaned")
+    
+    if "Flag1" in data.columns:
+        data = data[data["Flag1"] != "A"]
+    if "Flag2" in data.columns:
+        data = data[data["Flag2"] != "A"]
+    print("webcrawl data cleaned")
 
     data["Price"] = data["Price"].astype(int)
     data["Unit"] = data["Unit"].fillna("plex")
