@@ -49,10 +49,10 @@ for URL in URLs:
                     driver.execute_script("return arguments[0].scrollIntoView(true);", WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH,'//*[@class="paginate_button next"]' ))))
                     nextlink = driver.find_element(By.XPATH,'//*[@class="paginate_button next"]')
                     driver.execute_script("arguments[0].click();", nextlink)
-                    print("Navigating to Next Page")
+                    print(f"{URL[0]} WebCrawl: Navigating to Next Page")
                 except (TimeoutException, WebDriverException) as e:
+                    print(f"{URL[0]} WebCrawl Completed. Closing Browser")
                     driver.close()
-                    print("Closing Browser Session")
                     break
 
             Data2 = [element.replace('tbody', 'table') for element in Data]
