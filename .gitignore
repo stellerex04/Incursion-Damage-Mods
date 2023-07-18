@@ -1,3 +1,8 @@
+# Custom
+log/*.txt
+sets/*.csv
+webcrawler/*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
