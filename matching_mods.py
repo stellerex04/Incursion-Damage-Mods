@@ -86,7 +86,7 @@ for Output in Files:
             report2 = data3[(data3["TotalDamage"] >= 3.0784) & (data3["TotalROF"] >= 33.11)].copy()
         elif Output[1] == "Market GyroStabs": 
             # Vargur 
-            report2 = data3[(data3["TotalDamage"] >= 3.0784) & (data3["TotalROF"] >= 33.11)].copy()
+            report2 = data3[(data3["TotalDamage"] >= 3.093194) & (data3["TotalROF"] >= 33.1114)].copy()
         elif Output[1] == "Market MagStabs": 
             # Kronos
             report2 = data3[(data3["TotalDamage"] >= 3.093192) & (data3["TotalROF"] >= 31.23)].copy()
