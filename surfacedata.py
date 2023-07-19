@@ -38,6 +38,7 @@ for Output in Files:
             return row["Price"]
 
     data['Price'] = data.apply(lambda row: price_norm(row), axis=1)
+    
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
     

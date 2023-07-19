@@ -36,7 +36,23 @@ for Output in Files:
     else:
         print("The file does not exist") 
 
-    data = combination_data[(combination_data["DPS"] >= 26)]
+    combination_data["Price"] = combination_data["Price"].astype(int)
+    combination_data["Unit"] = combination_data["Unit"].fillna("plex")
+    combination_data["Contract"] = combination_data["Contract"].astype(str)
+
+    def price_norm(row):
+        if "billion" in row["Unit"]:
+            return row["Price"] * 1000000000
+        elif "million" in row["Unit"]:
+            return row["Price"] * 1000000 
+        elif "plex" in row["Unit"]:
+            return row["Price"] * 5100000
+        else:
+            return row["Price"]
+
+    combination_data['Price'] = combination_data.apply(lambda row: price_norm(row), axis=1)
+    data = combination_data[(combination_data["DPS"] >= 26) & (combination_data["Price"] <= 1000000000)]
+
     combination_data_list = list(data["ID"])
     combination_data_list = combination_data_list
     print("combination_data list created")
