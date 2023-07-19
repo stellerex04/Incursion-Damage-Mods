@@ -45,11 +45,13 @@ for Output in Files:
     size = 3000000
     chunked_list = list(chunked(combination_data_list2, size))
     print(f"chunked_list size: {size}")
-    data["Damage"] = data["Damage"].astype(float)
-    data["ROF"] = data["ROF"].astype(float)
-    data["Unit"] = data["Unit"].fillna("plex")
-    data["CPU"] = data["CPU"].astype(float)
-    data["Contract"] = data["Contract"].astype(str)
+
+    data = data.astype({
+        "Damage": float,
+        "ROF": float,
+        "CPU": float,
+        "Contract": str
+        })
 
     data = data[["ID", "CPU", 'Damage', 'ROF', "DPS", "Contract"]]
 
