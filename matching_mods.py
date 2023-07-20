@@ -36,7 +36,7 @@ for Output in Files:
     else:
         print("The file does not exist") 
 
-    combination_data["Price"] = combination_data["Price"].astype(int)
+    combination_data["Price"] = combination_data["Price"].astype("float64")
     combination_data["Unit"] = combination_data["Unit"].fillna("plex")
     combination_data["Contract"] = combination_data["Contract"].astype(str)
 
@@ -51,6 +51,7 @@ for Output in Files:
             return row["Price"]
 
     combination_data['Price'] = combination_data.apply(lambda row: price_norm(row), axis=1)
+    combination_data["Price"] = combination_data["Price"].astype("int64")
     data = combination_data[(combination_data["DPS"] >= 26) & (combination_data["Price"] <= 1000000000)]
 
     combination_data_list = list(data["ID"])

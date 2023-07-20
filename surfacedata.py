@@ -23,7 +23,7 @@ for Output in Files:
         data = data[data["Flag2"] != "A"]
     print("webcrawl data cleaned")
 
-    data["Price"] = data["Price"].astype(int)
+    data["Price"] = data["Price"].astype("float64")
     data["Unit"] = data["Unit"].fillna("plex")
     data["Contract"] = data["Contract"].astype(str)
 
@@ -38,7 +38,7 @@ for Output in Files:
             return row["Price"]
 
     data['Price'] = data.apply(lambda row: price_norm(row), axis=1)
-    
+    data["Price"] = data["Price"].astype("int64")
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
     
