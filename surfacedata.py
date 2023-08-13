@@ -1,7 +1,7 @@
 import pandas as pd
 import gspread
 import sys
-from reference import MODS
+from reference import MODS, COLUMNS
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
@@ -42,7 +42,7 @@ for Output in Files:
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
     
-    report3 = pd.read_csv("./sets/"+ Output[0] +"_sets.csv",names = [0,1,2,3, "TotalDamage","TotalROF", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"])
+    report3 = pd.read_csv("./sets/"+ Output[0] +"_sets.csv",names = COLUMNS)
     
     report3['Contract'] = report3[["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]].values.tolist()
     report3 = report3.drop(columns=["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"])
@@ -56,6 +56,7 @@ for Output in Files:
     report3["Contract"] = report3["Contract"].astype(str)
     report3 = pd.concat([report3, contract_agg], axis=1)
     report3 = report3.sort_values(by=["TotalPrice", 'TotalDamage', "TotalROF"], ascending=True).iloc[:2000]
+
 
     gc = gspread.oauth()
     sh = gc.open(Output[1])

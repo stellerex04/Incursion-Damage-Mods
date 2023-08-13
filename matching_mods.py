@@ -3,7 +3,7 @@ from itertools import combinations
 import sys
 from more_itertools import chunked
 import os
-from reference import MODS
+from reference import MODS, COLUMNS
 
 
 if len(sys.argv) > 1:
@@ -39,6 +39,7 @@ for Output in Files:
     combination_data["Price"] = combination_data["Price"].astype("float64")
     combination_data["Unit"] = combination_data["Unit"].fillna("plex")
     combination_data["Contract"] = combination_data["Contract"].astype(str)
+    combination_data["ROF"] = ((combination_data["ROF"] - 1) * 100).abs()
 
     def price_norm(row):
         if "billion" in row["Unit"]:
@@ -93,26 +94,28 @@ for Output in Files:
         data3 = data2.merge(data2damage.add_suffix('_damagaPenalty'),how="left",left_index=True, right_index=True)
         data3 = data3.merge(data2rof.add_suffix('_rofPenalty'),how="left",left_index=True, right_index=True)
 
-
-        data3["TotalDamage"] = (data3["Damage_first"] * data3["Damage_first_damagaPenalty"]) + (data3["Damage_second"] * data3["Damage_second_damagaPenalty"])+ (data3["Damage_third"] * data3["Damage_third_damagaPenalty"])+ (data3["Damage_fourth"] * data3["Damage_fourth_damagaPenalty"])
+        data3["TotalDamage"] = (((data3["Damage_first"] - 1) * data3["Damage_first_damagaPenalty"]) + 1) + \
+            (((data3["Damage_second"] - 1) * data3["Damage_second_damagaPenalty"]) + 1) + \
+            (((data3["Damage_third"] - 1) * data3["Damage_third_damagaPenalty"]) + 1) + \
+            (((data3["Damage_fourth"] - 1) * data3["Damage_fourth_damagaPenalty"]) + 1)
         data3["TotalROF"] = (data3["ROF_first"] * data3["ROF_first_rofPenalty"]) + (data3["ROF_second"] * data3["ROF_second_rofPenalty"])+ (data3["ROF_third"] * data3["ROF_third_rofPenalty"])+ (data3["ROF_fourth"] * data3["ROF_fourth_rofPenalty"])
         data3["TotalCPU"] = data3["CPU_first"] + data3["CPU_second"] + data3["CPU_third"] + data3["CPU_fourth"] 
         
         if Output[1] == "Market HeatSinks":       
             # Paladin
-            report2 = data3[(data3["TotalDamage"] >= 3.0784) & (data3["TotalROF"] >= 33.11)].copy()
+            report2 = data3[(data3["TotalDamage"] >= 4.355) & (data3["TotalROF"] >= 33.11)].copy()
         elif Output[1] == "Market GyroStabs": 
             # Vargur 
-            report2 = data3[(data3["TotalDamage"] >= 3.093194) & (data3["TotalROF"] >= 33.1114)].copy()
+            report2 = data3[(data3["TotalDamage"] >= 4.369) & (data3["TotalROF"] >= 33.1114)].copy()
         elif Output[1] == "Market MagStabs": 
             # Kronos
-            report2 = data3[(data3["TotalDamage"] >= 3.093192) & (data3["TotalROF"] >= 31.23)].copy()
-        
-        report3 = report2[[0,1,2,3,"TotalDamage","TotalROF", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]]       
+            report2 = data3[(data3["TotalDamage"] >= 4.368) & (data3["TotalROF"] >= 31.23)].copy()
+
+        report3 = report2[COLUMNS]       
   
         report3.to_csv(filepath, mode='a', index=False, header=False)
         chunkcount = chunkcount+1
-        print(f"{Output[0]} chunk" + str(chunkcount) + " saved.")    
+        print(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
         
     print(f"All {Output[0]} chunks saved.")
     
