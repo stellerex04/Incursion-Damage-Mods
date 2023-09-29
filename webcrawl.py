@@ -116,6 +116,32 @@ for URL in URLs:
             htmldf2['ID'] = htmldf2['ID'].str.replace(" ", "")
             htmldf2[["DPS","trash"]] = htmldf2["DPS"].str.split(',',expand=True)  
             htmldf2[["Price","trash"]] = htmldf2["Price"].str.split(',',expand=True) 
+            def add_plex(row):
+                if "+" in row["Price"]:
+                    mixed_value = row["Price"].split('+') 
+                    if "million" in mixed_value[0]:
+                        isk = mixed_value[0].split(" ")
+                        isk = float(isk[0]) * 1000000
+                        plex = int(mixed_value[1]) * 5100000
+                        output = plex + int(isk)
+                    elif "billion" in mixed_value[0]:
+                        isk = mixed_value[0].split(" ")
+                        isk = float(isk[0]) * 1000000000
+                        plex = int(mixed_value[1]) * 5100000
+                        output = plex + int(isk)
+                    if output > 1000000000:
+                        output = str(output/1000000000) + " billion"
+                    else:
+                        output = str(output/1000000) + " million"
+                    return output
+                elif "billion" in row["Price"]:
+                    return row["Price"]
+                elif "million" in row["Price"]:
+                    return row["Price"]
+                else:
+                    return row["Price"] + " plex"
+                    
+            htmldf2['Price'] = htmldf2.apply(add_plex, axis=1)
             htmldf2[["Price","Unit"]] = htmldf2["Price"].str.split(' ',expand=True) 
             htmldf2["Contract"] = htmldf2["Extract"].str.extract(r'Contract ([0-9]*)')
             htmldf2["Damage"] = htmldf2["Extract"].str.extract(r'damageMultiplier (\d+\.\d+)')

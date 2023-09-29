@@ -1,0 +1,9 @@
+pandas
+numpy
+gspread
+pandas-io
+selenium
+webdriver-manager
+lxml
+more_itertools
+html5lib

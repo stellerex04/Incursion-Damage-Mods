@@ -25,13 +25,14 @@ else:
 ChuckCount = 0
 
 for Output in Files:
-    combination_data = pd.read_csv(Output[0]) 
-    combination_data = combination_data.drop_duplicates(keep="first")
-    print("combination_data cleaned")
+    # combination_data = pd.read_csv(Output[0]) 
+    # combination_data = combination_data.drop_duplicates(keep="first")
+    # print("combination_data cleaned")
 
-    filepath = "D:\EVE Data\set collection\python\sets\\"+ Output[2] +"\sets.csv"
-    
+    filepath = "D:\GitHub\Incursion-Damage-Mods\sets\HeatSink_sets.csv"
+
     if os.path.exists(filepath):
+
         os.remove(filepath)
         print("Old file removed")
     else:
@@ -45,7 +46,8 @@ for Output in Files:
     sh = gc.open(Output[1])
 
  
-    combination_data = combination_data[(combination_data["DPS"] >= 26)]
+    # combination_data = combination_data[(combination_data["DPS"] >= 26)]
+    # combination_data = combination_data[combination_data["Price"] == 0]
 
     inputsheet = sh.worksheet("input")
     inputdf = pd.DataFrame(inputsheet.get_all_records())
@@ -65,7 +67,7 @@ for Output in Files:
         user_mods = inputdf[inputdf["REQUIRED IN SET"] == "FALSE"]
         user_mods = user_mods.drop(columns=['REQUIRED IN SET'])
         
-        combination_data = pd.concat([combination_data, user_mods])
+        combination_data = user_mods
 
         required_count = len(required_mods)
         required_mods_id = list(required_mods["ID"])
@@ -79,13 +81,14 @@ for Output in Files:
     print("combination_data list created")
     combination_data_list2 = list(combinations(combination_data_list, (4-required_count)))
     # combination_data_list2 = list(combinations(combination_data_list, (4)))
-      
+    
     size = 1000000
     chunked_list = list(chunked(combination_data_list2, size))
 
 
 
     data = pd.concat([combination_data, required_mods])
+   
 
     data["Damage"] = data["Damage"].astype(float)
     data["ROF"] = data["ROF"].astype(float)
@@ -141,10 +144,10 @@ for Output in Files:
 
         report = data3[[0,1,2,3,"TotalDamage","TotalROF","PRICE"]].copy()    
 
-        if Output[2] == "HeatSinks":            
+        if Output[2] == "HeatSink":            
             #Paladin Requirements [3.08] Damage [33] 
             report2 = report[(report["TotalDamage"] >= 3.078) & (report["TotalROF"] >= 33)]
-        elif Output[2] == "MagStabs": 
+        elif Output[2] == "MagStab": 
             # kronos requirements damage 3.9 and rof 40
             report2 = report[(report["TotalDamage"] >= 3.085) & (report["TotalROF"] >= 31) & (report["PRICE"] <= 3000000000)]
       
@@ -157,7 +160,8 @@ for Output in Files:
 
     report3 = pd.read_csv(filepath,names = [0, 1, 2, 3, 'TotalDamage', 'TotalROF', 'PRICE'])
 
-    report3 = report3.sort_values(by=["PRICE",'TotalDamage',"TotalROF",], ascending=True).iloc[:2000]
+    report3 = report3.sort_values(by=["PRICE",'TotalDamage',"TotalROF"], ascending=True)
+
     outputsheet = sh.worksheet("output")
 
     if len(report3) < 2000:
@@ -165,11 +169,5 @@ for Output in Files:
 
     outputsheet.update([report3.columns.values.tolist()] + report3.values.tolist())
 
-    with open('D:\EVE Data\set collection\python\log\\' + str(Output[2]) + '.txt', 'r') as f:
-        last_line = f.readlines()[-1]
-    last_line = last_line.replace("\n", "")
-
-    details = sh.worksheet("details")
-    details.update('B1', last_line)
 
     print(str(Output[1])+" Updated")
