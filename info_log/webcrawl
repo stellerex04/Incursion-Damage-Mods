@@ -1,0 +1,13 @@
+2023-12-07 17:15:09,823 - INFO - Script started at 2023-12-07 17:15:09.823138
+2023-12-07 17:15:09,825 - INFO - ====== WebDriver manager ======
+2023-12-07 17:15:10,463 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:15:10,464 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:15:10,464 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:15:10,464 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:15:10,658 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:15:10,660 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:15:10,661 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:15:10,717 - INFO - Driver downloading response is 200
+2023-12-07 17:15:10,844 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:15:10,937 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:15:12,106 - INFO - Accesing: https://mutaplasmid.space/type/49726/contracts/

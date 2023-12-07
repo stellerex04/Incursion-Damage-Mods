@@ -1,7 +1,13 @@
 import pandas as pd
 import gspread
 import sys
-from reference import MODS, COLUMNS
+from reference import MODS, COLUMNS, start_logging
+import datetime
+import logging
+
+start_logging('./info_log/surfacedata.txt')
+
+logging.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
@@ -76,3 +82,5 @@ for Output in Files:
     details.update('B1', last_line)
 
     print(str(Output[1])+" Updated")
+    
+logging.info('Script completed at %s', datetime.datetime.now())

@@ -3,8 +3,13 @@ from itertools import combinations
 import sys
 from more_itertools import chunked
 import os
-from reference import MODS, COLUMNS
+from reference import MODS, COLUMNS, start_logging
+import datetime
+import logging
 
+start_logging('./info_log/matching_mods.txt')
+
+logging.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
@@ -119,3 +124,4 @@ for Output in Files:
         
     print(f"All {Output[0]} chunks saved.")
     
+logging.info('Script completed at %s', datetime.datetime.now())

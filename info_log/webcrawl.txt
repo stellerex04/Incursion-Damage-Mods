@@ -1,0 +1,12 @@
+2023-12-07 17:16:03,397 - INFO - Script started at 2023-12-07 17:16:03.397434
+2023-12-07 17:16:03,398 - INFO - ====== WebDriver manager ======
+2023-12-07 17:16:03,988 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:16:03,989 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:16:03,989 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:16:03,990 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:16:04,046 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:16:04,048 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:16:04,049 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:16:04,090 - INFO - Driver downloading response is 200
+2023-12-07 17:16:04,253 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:16:04,353 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
