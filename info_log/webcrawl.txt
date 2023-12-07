@@ -84,3 +84,188 @@
 2023-12-07 17:20:35,304 - INFO - GyroStab Log Updated
 2023-12-07 17:20:35,320 - INFO - Script completed at 2023-12-07 17:20:35.320556
 2023-12-07 17:20:35,330 - INFO - Script started at 2023-12-07 17:20:35.330529
+2023-12-07 17:23:03,783 - INFO - Script started at 2023-12-07 17:23:03.783032
+2023-12-07 17:23:03,783 - INFO - ====== WebDriver manager ======
+2023-12-07 17:23:04,375 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:23:04,377 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:23:04,377 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:23:04,377 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:23:04,413 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:23:04,414 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:23:04,414 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:23:04,466 - INFO - Driver downloading response is 200
+2023-12-07 17:23:04,568 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:23:04,664 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:23:05,782 - INFO - Accesing: https://mutaplasmid.space/type/49726/contracts/
+2023-12-07 17:23:13,118 - INFO - HeatSink WebCrawl: Navigating to Page 2
+2023-12-07 17:23:13,200 - INFO - HeatSink WebCrawl: Navigating to Page 3
+2023-12-07 17:23:13,283 - INFO - HeatSink WebCrawl: Navigating to Page 4
+2023-12-07 17:23:13,363 - INFO - HeatSink WebCrawl: Navigating to Page 5
+2023-12-07 17:23:13,458 - INFO - HeatSink WebCrawl: Navigating to Page 6
+2023-12-07 17:23:13,529 - INFO - HeatSink WebCrawl: Navigating to Page 7
+2023-12-07 17:23:13,660 - INFO - HeatSink WebCrawl: Navigating to Page 8
+2023-12-07 17:23:13,746 - INFO - HeatSink WebCrawl: Navigating to Page 9
+2023-12-07 17:23:13,815 - INFO - HeatSink WebCrawl: Navigating to Page 10
+2023-12-07 17:23:13,918 - INFO - HeatSink WebCrawl: Navigating to Page 11
+2023-12-07 17:23:14,003 - INFO - HeatSink WebCrawl: Navigating to Page 12
+2023-12-07 17:23:14,109 - INFO - HeatSink WebCrawl: Navigating to Page 13
+2023-12-07 17:23:14,185 - INFO - HeatSink WebCrawl: Navigating to Page 14
+2023-12-07 17:23:44,374 - INFO - HeatSink WebCrawl Completed.
+2023-12-07 17:23:44,758 - INFO - HTML Processing Completed
+2023-12-07 17:23:44,789 - INFO - HeatSink Saved
+2023-12-07 17:23:44,790 - INFO - [07.12.23] Time - 17_23_44
+2023-12-07 17:23:44,802 - INFO - HeatSink Log Updated
+2023-12-07 17:23:44,802 - INFO - Accesing: https://mutaplasmid.space/type/49722/contracts/
+2023-12-07 17:23:50,345 - INFO - MagStab WebCrawl: Navigating to Page 2
+2023-12-07 17:23:50,450 - INFO - MagStab WebCrawl: Navigating to Page 3
+2023-12-07 17:23:50,535 - INFO - MagStab WebCrawl: Navigating to Page 4
+2023-12-07 17:23:50,638 - INFO - MagStab WebCrawl: Navigating to Page 5
+2023-12-07 17:23:50,714 - INFO - MagStab WebCrawl: Navigating to Page 6
+2023-12-07 17:23:50,799 - INFO - MagStab WebCrawl: Navigating to Page 7
+2023-12-07 17:23:50,907 - INFO - MagStab WebCrawl: Navigating to Page 8
+2023-12-07 17:23:50,988 - INFO - MagStab WebCrawl: Navigating to Page 9
+2023-12-07 17:23:51,072 - INFO - MagStab WebCrawl: Navigating to Page 10
+2023-12-07 17:23:51,157 - INFO - MagStab WebCrawl: Navigating to Page 11
+2023-12-07 17:23:51,240 - INFO - MagStab WebCrawl: Navigating to Page 12
+2023-12-07 17:23:51,315 - INFO - MagStab WebCrawl: Navigating to Page 13
+2023-12-07 17:23:51,399 - INFO - MagStab WebCrawl: Navigating to Page 14
+2023-12-07 17:24:21,580 - INFO - MagStab WebCrawl Completed.
+2023-12-07 17:24:21,850 - INFO - HTML Processing Completed
+2023-12-07 17:24:21,886 - INFO - MagStab Saved
+2023-12-07 17:24:21,886 - INFO - [07.12.23] Time - 17_24_21
+2023-12-07 17:24:21,896 - INFO - MagStab Log Updated
+2023-12-07 17:24:21,896 - INFO - Accesing: https://mutaplasmid.space/type/49730/contracts/
+2023-12-07 17:24:27,874 - INFO - GyroStab WebCrawl: Navigating to Page 2
+2023-12-07 17:24:27,993 - INFO - GyroStab WebCrawl: Navigating to Page 3
+2023-12-07 17:24:28,099 - INFO - GyroStab WebCrawl: Navigating to Page 4
+2023-12-07 17:24:28,194 - INFO - GyroStab WebCrawl: Navigating to Page 5
+2023-12-07 17:24:28,360 - INFO - GyroStab WebCrawl: Navigating to Page 6
+2023-12-07 17:24:28,503 - INFO - GyroStab WebCrawl: Navigating to Page 7
+2023-12-07 17:24:28,603 - INFO - GyroStab WebCrawl: Navigating to Page 8
+2023-12-07 17:24:28,713 - INFO - GyroStab WebCrawl: Navigating to Page 9
+2023-12-07 17:24:28,819 - INFO - GyroStab WebCrawl: Navigating to Page 10
+2023-12-07 17:24:28,957 - INFO - GyroStab WebCrawl: Navigating to Page 11
+2023-12-07 17:24:29,063 - INFO - GyroStab WebCrawl: Navigating to Page 12
+2023-12-07 17:24:29,197 - INFO - GyroStab WebCrawl: Navigating to Page 13
+2023-12-07 17:24:29,291 - INFO - GyroStab WebCrawl: Navigating to Page 14
+2023-12-07 17:24:29,400 - INFO - GyroStab WebCrawl: Navigating to Page 15
+2023-12-07 17:24:29,529 - INFO - GyroStab WebCrawl: Navigating to Page 16
+2023-12-07 17:24:29,630 - INFO - GyroStab WebCrawl: Navigating to Page 17
+2023-12-07 17:25:00,238 - INFO - GyroStab WebCrawl Completed.
+2023-12-07 17:25:00,544 - INFO - HTML Processing Completed
+2023-12-07 17:25:00,585 - INFO - GyroStab Saved
+2023-12-07 17:25:00,585 - INFO - [07.12.23] Time - 17_25_00
+2023-12-07 17:25:00,595 - INFO - GyroStab Log Updated
+2023-12-07 17:25:00,609 - INFO - Script completed at 2023-12-07 17:25:00.609771
+2023-12-07 17:25:00,625 - INFO - Script started at 2023-12-07 17:25:00.625728
+2023-12-07 17:25:00,637 - INFO - webcrawl data cleaned
+2023-12-07 17:25:00,639 - INFO - Old file removed
+2023-12-07 17:25:00,644 - INFO - combination_data list created
+2023-12-07 17:25:00,780 - INFO - chunked_list size: 3000000
+2023-12-07 17:25:05,991 - INFO - HeatSink chunk 1 saved.
+2023-12-07 17:25:05,991 - INFO - All HeatSink chunks saved.
+2023-12-07 17:25:06,003 - INFO - webcrawl data cleaned
+2023-12-07 17:25:06,007 - INFO - Old file removed
+2023-12-07 17:25:06,012 - INFO - combination_data list created
+2023-12-07 17:25:06,250 - INFO - chunked_list size: 3000000
+2023-12-07 17:25:09,067 - INFO - Script started at 2023-12-07 17:25:09.067095
+2023-12-07 17:25:09,067 - INFO - ====== WebDriver manager ======
+2023-12-07 17:25:09,689 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:25:09,690 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:25:09,691 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:25:09,691 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:25:09,728 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:25:09,730 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:25:09,730 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:25:09,768 - INFO - Driver downloading response is 200
+2023-12-07 17:25:09,890 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:25:12,576 - INFO - MagStab chunk 1 saved.
+2023-12-07 17:25:12,577 - INFO - All MagStab chunks saved.
+2023-12-07 17:25:12,588 - INFO - webcrawl data cleaned
+2023-12-07 17:25:12,600 - INFO - Old file removed
+2023-12-07 17:25:12,606 - INFO - combination_data list created
+2023-12-07 17:25:17,250 - INFO - chunked_list size: 3000000
+2023-12-07 17:25:24,309 - INFO - GyroStab chunk 1 saved.
+2023-12-07 17:25:31,168 - INFO - GyroStab chunk 2 saved.
+2023-12-07 17:25:38,233 - INFO - GyroStab chunk 3 saved.
+2023-12-07 17:25:45,336 - INFO - GyroStab chunk 4 saved.
+2023-12-07 17:25:52,093 - INFO - GyroStab chunk 5 saved.
+2023-12-07 17:25:58,692 - INFO - GyroStab chunk 6 saved.
+2023-12-07 17:26:05,982 - INFO - GyroStab chunk 7 saved.
+2023-12-07 17:26:13,644 - INFO - GyroStab chunk 8 saved.
+2023-12-07 17:26:20,932 - INFO - GyroStab chunk 9 saved.
+2023-12-07 17:26:27,656 - INFO - GyroStab chunk 10 saved.
+2023-12-07 17:26:35,481 - INFO - GyroStab chunk 11 saved.
+2023-12-07 17:26:43,310 - INFO - GyroStab chunk 12 saved.
+2023-12-07 17:26:50,728 - INFO - GyroStab chunk 13 saved.
+2023-12-07 17:26:57,566 - INFO - GyroStab chunk 14 saved.
+2023-12-07 17:27:05,123 - INFO - GyroStab chunk 15 saved.
+2023-12-07 17:27:11,935 - INFO - GyroStab chunk 16 saved.
+2023-12-07 17:27:17,808 - INFO - GyroStab chunk 17 saved.
+2023-12-07 17:27:17,808 - INFO - All GyroStab chunks saved.
+2023-12-07 17:27:17,810 - INFO - Script completed at 2023-12-07 17:27:17.810806
+2023-12-07 17:27:18,706 - INFO - Script started at 2023-12-07 17:27:18.706840
+2023-12-07 17:27:19,034 - INFO - webcrawl data cleaned
+2023-12-07 17:27:31,236 - INFO - Market HeatSinks Updated
+2023-12-07 17:27:31,275 - INFO - webcrawl data cleaned
+2023-12-07 17:27:40,823 - INFO - Market MagStabs Updated
+2023-12-07 17:27:40,944 - INFO - webcrawl data cleaned
+2023-12-07 17:28:09,721 - INFO - Market GyroStabs Updated
+2023-12-07 17:28:09,721 - INFO - Script completed at 2023-12-07 17:28:09.721356
+2023-12-07 17:29:52,894 - INFO - Script started at 2023-12-07 17:29:52.894706
+2023-12-07 17:29:52,894 - INFO - ====== WebDriver manager ======
+2023-12-07 17:29:53,543 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:29:53,543 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:29:53,544 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:29:53,544 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:29:53,582 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:29:53,584 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:29:53,584 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:29:53,622 - INFO - Driver downloading response is 200
+2023-12-07 17:29:53,727 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:29:53,821 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:29:55,033 - INFO - Accesing: https://mutaplasmid.space/type/49726/contracts/
+2023-12-07 17:30:02,495 - INFO - HeatSink WebCrawl: Navigating to Page 2
+2023-12-07 17:30:02,590 - INFO - HeatSink WebCrawl: Navigating to Page 3
+2023-12-07 17:30:02,662 - INFO - HeatSink WebCrawl: Navigating to Page 4
+2023-12-07 17:30:02,795 - INFO - HeatSink WebCrawl: Navigating to Page 5
+2023-12-07 17:30:02,889 - INFO - HeatSink WebCrawl: Navigating to Page 6
+2023-12-07 17:30:02,963 - INFO - HeatSink WebCrawl: Navigating to Page 7
+2023-12-07 17:30:03,075 - INFO - HeatSink WebCrawl: Navigating to Page 8
+2023-12-07 17:30:03,161 - INFO - HeatSink WebCrawl: Navigating to Page 9
+2023-12-07 17:30:03,233 - INFO - HeatSink WebCrawl: Navigating to Page 10
+2023-12-07 17:30:03,334 - INFO - HeatSink WebCrawl: Navigating to Page 11
+2023-12-07 17:30:03,419 - INFO - HeatSink WebCrawl: Navigating to Page 12
+2023-12-07 17:30:03,523 - INFO - HeatSink WebCrawl: Navigating to Page 13
+2023-12-07 17:30:03,600 - INFO - HeatSink WebCrawl: Navigating to Page 14
+2023-12-07 17:30:36,768 - INFO - Script started at 2023-12-07 17:30:36.768473
+2023-12-07 17:30:36,769 - INFO - ====== WebDriver manager ======
+2023-12-07 17:30:37,384 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:37,385 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:37,386 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:30:37,386 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:37,423 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:30:37,424 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:30:37,425 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:30:37,462 - INFO - Driver downloading response is 200
+2023-12-07 17:30:37,579 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:37,671 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:30:49,188 - INFO - Script started at 2023-12-07 17:30:49.188076
+2023-12-07 17:30:49,189 - INFO - ====== WebDriver manager ======
+2023-12-07 17:30:49,775 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:49,776 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:49,776 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:30:49,776 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:49,815 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:30:49,817 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:30:49,817 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:30:49,857 - INFO - Driver downloading response is 200
+2023-12-07 17:30:49,964 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:30:50,055 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:30:51,216 - INFO - Accesing: https://mutaplasmid.space/type/49726/contracts/
+2023-12-07 17:30:58,656 - INFO - HeatSink WebCrawl: Navigating to Page 2
+2023-12-07 17:30:58,740 - INFO - HeatSink WebCrawl: Navigating to Page 3
+2023-12-07 17:30:58,820 - INFO - HeatSink WebCrawl: Navigating to Page 4
+2023-12-07 17:30:58,904 - INFO - HeatSink WebCrawl: Navigating to Page 5
+2023-12-07 17:30:58,967 - INFO - HeatSink WebCrawl: Navigating to Page 6
+2023-12-07 17:30:59,024 - INFO - HeatSink WebCrawl Completed.
