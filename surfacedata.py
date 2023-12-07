@@ -1,7 +1,7 @@
 import pandas as pd
 import gspread
 import sys
-from reference import MODS, COLUMNS, start_logging
+from reference import MODS, COLUMNS, start_logging, price_df_norm
 import datetime
 import logging
 
@@ -17,38 +17,13 @@ if len(sys.argv) > 1:
         Files = [MODS[2]]
 else:
     Files = MODS
-
+    
 for Output in Files:
     data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
-    data = data.drop_duplicates(keep="first")
-    
-    if "Flag1" in data.columns:
-        data = data[data["Flag1"] != "A"]
-    if "Flag2" in data.columns:
-        data = data[data["Flag2"] != "A"]
-    logging.info("webcrawl data cleaned")
-
-    data["Price"] = data["Price"].astype("float64")
-    data["Unit"] = data["Unit"].fillna("plex")
-    data["Contract"] = data["Contract"].astype(str)
-
-    def price_norm(row):
-        if "billion" in row["Unit"]:
-            return row["Price"] * 1000000000
-        elif "million" in row["Unit"]:
-            return row["Price"] * 1000000 
-        elif "plex" in row["Unit"]:
-            return row["Price"] * 5100000
-        else:
-            return row["Price"]
-
-    data['Price'] = data.apply(lambda row: price_norm(row), axis=1)
-    data["Price"] = data["Price"].astype("int64")
+    data = price_df_norm(data)
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
-    
     report3 = pd.read_csv("./sets/"+ Output[0] +"_sets.csv",names = COLUMNS)
-    
     report3['Contract'] = report3[["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]].values.tolist()
     report3 = report3.drop(columns=["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"])
 
@@ -61,7 +36,6 @@ for Output in Files:
     report3["Contract"] = report3["Contract"].astype(str)
     report3 = pd.concat([report3, contract_agg], axis=1)
     report3 = report3.sort_values(by=["TotalPrice", 'TotalDamage', "TotalROF"], ascending=True).iloc[:2000]
-
 
     gc = gspread.oauth()
     sh = gc.open(Output[1])

@@ -138,7 +138,7 @@ for URL in URLs:
                 htmldf2 = pd.concat([htmldf2, noflag_df], ignore_index=True)
                 
             else:
-                raise ValueError("Invalid html output.")
+                raise ValueError("Invalid html output")
 
             htmldf2 = htmldf2.astype('str') 
             htmldf2 = htmldf2.replace("\)","",regex=True).replace("\(","",regex=True).replace("'","",regex=True)
@@ -163,7 +163,12 @@ for URL in URLs:
             htmldf2["ID"] = "https://mutaplasmid.space" + htmldf2["ID"]
 
             htmldf2 = htmldf2[htmldf2["ID"].notna()]
-
+            htmldf2 = htmldf2.drop_duplicates(keep="first")
+            if "Flag1" in htmldf2.columns:
+                htmldf2 = htmldf2[htmldf2["Flag1"] != "A"]
+            if "Flag2" in htmldf2.columns:
+                htmldf2 = htmldf2[htmldf2["Flag2"] != "A"]
+            logging.info("Webcrawl data cleaned")
             htmldf2.to_csv("./webcrawler/" + str(URL[0]) + "Output.csv",index=False)
             logging.info(f"{URL[0]} Saved")
             

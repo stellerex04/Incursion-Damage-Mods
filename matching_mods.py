@@ -3,7 +3,7 @@ from itertools import combinations
 import sys
 from more_itertools import chunked
 import os
-from reference import MODS, COLUMNS, start_logging
+from reference import MODS, COLUMNS, start_logging, price_df_norm
 import datetime
 import logging
 
@@ -24,39 +24,15 @@ chunkcount = 0
 
 for Output in Files:
     combination_data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
-    combination_data = combination_data.drop_duplicates(keep="first")
-    
-    if "Flag1" in combination_data.columns:
-        combination_data = combination_data[combination_data["Flag1"] != "A"]
-    if "Flag2" in combination_data.columns:
-        combination_data = combination_data[combination_data["Flag2"] != "A"]
-    logging.info("webcrawl data cleaned")
-
     filepath = "./sets/"+ Output[0] +"_sets.csv"
     
     if os.path.exists(filepath):
         os.remove(filepath)
-        logging.info("Old file removed")
-    else:
-        logging.info("The file does not exist") 
+        logging.info("Outdated file removed")
+    logging.info("Creating new file") 
 
-    combination_data["Price"] = combination_data["Price"].astype("float64")
-    combination_data["Unit"] = combination_data["Unit"].fillna("plex")
-    combination_data["Contract"] = combination_data["Contract"].astype(str)
+    combination_data = price_df_norm(combination_data)
     combination_data["ROF"] = ((combination_data["ROF"] - 1) * 100).abs()
-
-    def price_norm(row):
-        if "billion" in row["Unit"]:
-            return row["Price"] * 1000000000
-        elif "million" in row["Unit"]:
-            return row["Price"] * 1000000 
-        elif "plex" in row["Unit"]:
-            return row["Price"] * 5100000
-        else:
-            return row["Price"]
-
-    combination_data['Price'] = combination_data.apply(lambda row: price_norm(row), axis=1)
-    combination_data["Price"] = combination_data["Price"].astype("int64")
     data = combination_data[(combination_data["DPS"] >= 26) & (combination_data["Price"] <= 1000000000)]
 
     combination_data_list = list(data["ID"])
