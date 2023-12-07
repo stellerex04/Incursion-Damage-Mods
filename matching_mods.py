@@ -8,7 +8,6 @@ import datetime
 import logging
 
 start_logging('./info_log/matching_mods.txt')
-
 logging.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
@@ -31,15 +30,15 @@ for Output in Files:
         combination_data = combination_data[combination_data["Flag1"] != "A"]
     if "Flag2" in combination_data.columns:
         combination_data = combination_data[combination_data["Flag2"] != "A"]
-    print("webcrawl data cleaned")
+    logging.info("webcrawl data cleaned")
 
     filepath = "./sets/"+ Output[0] +"_sets.csv"
     
     if os.path.exists(filepath):
         os.remove(filepath)
-        print("Old file removed")
+        logging.info("Old file removed")
     else:
-        print("The file does not exist") 
+        logging.info("The file does not exist") 
 
     combination_data["Price"] = combination_data["Price"].astype("float64")
     combination_data["Unit"] = combination_data["Unit"].fillna("plex")
@@ -62,12 +61,12 @@ for Output in Files:
 
     combination_data_list = list(data["ID"])
     combination_data_list = combination_data_list
-    print("combination_data list created")
+    logging.info("combination_data list created")
     combination_data_list2 = list(combinations(combination_data_list, (4)))
         
     size = 3000000
     chunked_list = list(chunked(combination_data_list2, size))
-    print(f"chunked_list size: {size}")
+    logging.info(f"chunked_list size: {size}")
 
     data = data.astype({
         "Damage": float,
@@ -120,8 +119,8 @@ for Output in Files:
   
         report3.to_csv(filepath, mode='a', index=False, header=False)
         chunkcount = chunkcount+1
-        print(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
+        logging.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
         
-    print(f"All {Output[0]} chunks saved.")
+    logging.info(f"All {Output[0]} chunks saved.")
     
 logging.info('Script completed at %s', datetime.datetime.now())

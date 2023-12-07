@@ -6,7 +6,6 @@ import datetime
 import logging
 
 start_logging('./info_log/surfacedata.txt')
-
 logging.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
@@ -27,7 +26,7 @@ for Output in Files:
         data = data[data["Flag1"] != "A"]
     if "Flag2" in data.columns:
         data = data[data["Flag2"] != "A"]
-    print("webcrawl data cleaned")
+    logging.info("webcrawl data cleaned")
 
     data["Price"] = data["Price"].astype("float64")
     data["Unit"] = data["Unit"].fillna("plex")
@@ -81,6 +80,6 @@ for Output in Files:
     details = sh.worksheet("details")
     details.update('B1', last_line)
 
-    print(str(Output[1])+" Updated")
+    logging.info(str(Output[1])+" Updated")
     
 logging.info('Script completed at %s', datetime.datetime.now())
