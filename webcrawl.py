@@ -46,7 +46,7 @@ for URL in URLs:
 
             while True:
                 try:
-                    
+                    driver.implicitly_wait(60)
                     rows = WebDriverWait(driver,50).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[6]/div/div/div/table/tbody')))
                     for row in rows:
                         Data.append(row.get_attribute('outerHTML'))
