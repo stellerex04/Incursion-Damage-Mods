@@ -2,7 +2,7 @@
 log/*.txt
 sets/*.csv
 webcrawler/*.csv
-info_log/*.csv
+info_log/*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

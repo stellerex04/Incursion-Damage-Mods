@@ -10,3 +10,77 @@
 2023-12-07 17:16:04,090 - INFO - Driver downloading response is 200
 2023-12-07 17:16:04,253 - INFO - Get LATEST chromedriver version for google-chrome
 2023-12-07 17:16:04,353 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:18:39,258 - INFO - Script started at 2023-12-07 17:18:39.257630
+2023-12-07 17:18:39,258 - INFO - ====== WebDriver manager ======
+2023-12-07 17:18:39,850 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:18:39,851 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:18:39,851 - INFO - There is no [win64] chromedriver "119.0.6045.200" for browser google-chrome "119.0.6045.200" in cache
+2023-12-07 17:18:39,851 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:18:39,889 - INFO - WebDriver version 119.0.6045.105 selected
+2023-12-07 17:18:39,891 - INFO - Modern chrome version https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:18:39,891 - INFO - About to download new driver from https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/win32/chromedriver-win32.zip
+2023-12-07 17:18:39,931 - INFO - Driver downloading response is 200
+2023-12-07 17:18:40,035 - INFO - Get LATEST chromedriver version for google-chrome
+2023-12-07 17:18:40,131 - INFO - Driver has been saved in cache [C:\Users\Man\.wdm\drivers\chromedriver\win64\119.0.6045.200]
+2023-12-07 17:18:41,267 - INFO - Accesing: https://mutaplasmid.space/type/49726/contracts/
+2023-12-07 17:18:48,555 - INFO - HeatSink WebCrawl: Navigating to Page 2
+2023-12-07 17:18:48,637 - INFO - HeatSink WebCrawl: Navigating to Page 3
+2023-12-07 17:18:48,718 - INFO - HeatSink WebCrawl: Navigating to Page 4
+2023-12-07 17:18:48,801 - INFO - HeatSink WebCrawl: Navigating to Page 5
+2023-12-07 17:18:48,885 - INFO - HeatSink WebCrawl: Navigating to Page 6
+2023-12-07 17:18:48,966 - INFO - HeatSink WebCrawl: Navigating to Page 7
+2023-12-07 17:18:49,030 - INFO - HeatSink WebCrawl: Navigating to Page 8
+2023-12-07 17:18:49,107 - INFO - HeatSink WebCrawl: Navigating to Page 9
+2023-12-07 17:18:49,206 - INFO - HeatSink WebCrawl: Navigating to Page 10
+2023-12-07 17:18:49,281 - INFO - HeatSink WebCrawl: Navigating to Page 11
+2023-12-07 17:18:49,361 - INFO - HeatSink WebCrawl: Navigating to Page 12
+2023-12-07 17:18:49,442 - INFO - HeatSink WebCrawl: Navigating to Page 13
+2023-12-07 17:18:49,524 - INFO - HeatSink WebCrawl: Navigating to Page 14
+2023-12-07 17:19:19,959 - INFO - HeatSink WebCrawl Completed.
+2023-12-07 17:19:20,343 - INFO - HTML Processing Completed
+2023-12-07 17:19:20,373 - INFO - HeatSink Saved
+2023-12-07 17:19:20,374 - INFO - [07.12.23] Time - 17_19_20
+2023-12-07 17:19:20,374 - INFO - HeatSink Log Updated
+2023-12-07 17:19:20,375 - INFO - Accesing: https://mutaplasmid.space/type/49722/contracts/
+2023-12-07 17:19:25,948 - INFO - MagStab WebCrawl: Navigating to Page 2
+2023-12-07 17:19:26,031 - INFO - MagStab WebCrawl: Navigating to Page 3
+2023-12-07 17:19:26,130 - INFO - MagStab WebCrawl: Navigating to Page 4
+2023-12-07 17:19:26,194 - INFO - MagStab WebCrawl: Navigating to Page 5
+2023-12-07 17:19:26,270 - INFO - MagStab WebCrawl: Navigating to Page 6
+2023-12-07 17:19:26,359 - INFO - MagStab WebCrawl: Navigating to Page 7
+2023-12-07 17:19:26,449 - INFO - MagStab WebCrawl: Navigating to Page 8
+2023-12-07 17:19:26,547 - INFO - MagStab WebCrawl: Navigating to Page 9
+2023-12-07 17:19:26,611 - INFO - MagStab WebCrawl: Navigating to Page 10
+2023-12-07 17:19:26,717 - INFO - MagStab WebCrawl: Navigating to Page 11
+2023-12-07 17:19:26,796 - INFO - MagStab WebCrawl: Navigating to Page 12
+2023-12-07 17:19:26,887 - INFO - MagStab WebCrawl: Navigating to Page 13
+2023-12-07 17:19:26,961 - INFO - MagStab WebCrawl: Navigating to Page 14
+2023-12-07 17:19:57,186 - INFO - MagStab WebCrawl Completed.
+2023-12-07 17:19:57,445 - INFO - HTML Processing Completed
+2023-12-07 17:19:57,477 - INFO - MagStab Saved
+2023-12-07 17:19:57,478 - INFO - [07.12.23] Time - 17_19_57
+2023-12-07 17:19:57,478 - INFO - MagStab Log Updated
+2023-12-07 17:19:57,479 - INFO - Accesing: https://mutaplasmid.space/type/49730/contracts/
+2023-12-07 17:20:03,422 - INFO - GyroStab WebCrawl: Navigating to Page 2
+2023-12-07 17:20:03,507 - INFO - GyroStab WebCrawl: Navigating to Page 3
+2023-12-07 17:20:03,587 - INFO - GyroStab WebCrawl: Navigating to Page 4
+2023-12-07 17:20:03,672 - INFO - GyroStab WebCrawl: Navigating to Page 5
+2023-12-07 17:20:03,767 - INFO - GyroStab WebCrawl: Navigating to Page 6
+2023-12-07 17:20:03,850 - INFO - GyroStab WebCrawl: Navigating to Page 7
+2023-12-07 17:20:03,911 - INFO - GyroStab WebCrawl: Navigating to Page 8
+2023-12-07 17:20:03,993 - INFO - GyroStab WebCrawl: Navigating to Page 9
+2023-12-07 17:20:04,077 - INFO - GyroStab WebCrawl: Navigating to Page 10
+2023-12-07 17:20:04,221 - INFO - GyroStab WebCrawl: Navigating to Page 11
+2023-12-07 17:20:04,306 - INFO - GyroStab WebCrawl: Navigating to Page 12
+2023-12-07 17:20:04,394 - INFO - GyroStab WebCrawl: Navigating to Page 13
+2023-12-07 17:20:04,478 - INFO - GyroStab WebCrawl: Navigating to Page 14
+2023-12-07 17:20:04,580 - INFO - GyroStab WebCrawl: Navigating to Page 15
+2023-12-07 17:20:04,644 - INFO - GyroStab WebCrawl: Navigating to Page 16
+2023-12-07 17:20:04,737 - INFO - GyroStab WebCrawl: Navigating to Page 17
+2023-12-07 17:20:34,994 - INFO - GyroStab WebCrawl Completed.
+2023-12-07 17:20:35,265 - INFO - HTML Processing Completed
+2023-12-07 17:20:35,303 - INFO - GyroStab Saved
+2023-12-07 17:20:35,304 - INFO - [07.12.23] Time - 17_20_35
+2023-12-07 17:20:35,304 - INFO - GyroStab Log Updated
+2023-12-07 17:20:35,320 - INFO - Script completed at 2023-12-07 17:20:35.320556
+2023-12-07 17:20:35,330 - INFO - Script started at 2023-12-07 17:20:35.330529
