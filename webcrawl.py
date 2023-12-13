@@ -17,8 +17,9 @@ from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-start_logging('./info_log/webcrawl.txt')
-logging.info('Script started at %s', datetime.datetime.now())
+start_logging('./info_log/webcrawl.log', __name__)
+logger = logging.getLogger(__name__)
+logger.info('Script started at %s', datetime.datetime.now())
 
 options = Options()
 options.add_argument("start-maximized")
@@ -68,7 +69,7 @@ for URL in URLs:
     success = False
     while attempts < 3 and not success:
         try:
-            logging.info(f"Accesing: https://mutaplasmid.space/type/{URL[2]}/contracts/")
+            logger.info(f"Accesing: https://mutaplasmid.space/type/{URL[2]}/contracts/")
             driver.get(f"https://mutaplasmid.space/type/{URL[2]}/contracts/")
             time.sleep(5)
             Data = []
@@ -85,9 +86,9 @@ for URL in URLs:
                     nextlink = driver.find_element(By.XPATH,'//*[@class="paginate_button next"]')
                     driver.execute_script("arguments[0].click();", nextlink)
                     page = page + 1
-                    logging.info(f"{URL[0]} WebCrawl: Navigating to Page {page}")
+                    logger.info(f"{URL[0]} WebCrawl: Navigating to Page {page}")
                 except (TimeoutException, WebDriverException) as e:
-                    logging.info(f"{URL[0]} WebCrawl Completed.")
+                    logger.info(f"{URL[0]} WebCrawl Completed.")
                     break
 
             Data2 = [element.replace('tbody', 'table') for element in Data]
@@ -110,7 +111,7 @@ for URL in URLs:
                 htmldf = pd.concat([htmldf,df2])
 
             if len(htmldf[htmldf[0].str.contains("Loading") == True]) == 0:
-                logging.info("HTML Processing Completed")
+                logger.info("HTML Processing Completed")
             else:
                 raise ValueError("HTML Processing Error")
 
@@ -168,27 +169,27 @@ for URL in URLs:
                 htmldf2 = htmldf2[htmldf2["Flag1"] != "A"]
             if "Flag2" in htmldf2.columns:
                 htmldf2 = htmldf2[htmldf2["Flag2"] != "A"]
-            logging.info("Webcrawl data cleaned")
+            logger.info("Webcrawl data cleaned")
             htmldf2.to_csv("./webcrawler/" + str(URL[0]) + "Output.csv",index=False)
-            logging.info(f"{URL[0]} Saved")
+            logger.info(f"{URL[0]} Saved")
             
             t = datetime.datetime.now()
             timestamp = t.strftime("[%d.%m.%y] Time - %H_%M_%S")
             log_msg = str(timestamp)
-            logging.info(log_msg)
+            logger.info(log_msg)
             with open('./log/' + str(URL[0]) + '.txt','a') as file:
                 file.write(log_msg + "\n")
 
-            logging.info(f"{URL[0]} Log Updated")
+            logger.info(f"{URL[0]} Log Updated")
             success = True
 
         except Exception as e:
-            logging.info(e)
+            logger.info(e)
             attempts += 1
-            logging.info(f"Attempt:{attempts}")
+            logger.info(f"Attempt:{attempts}")
             if attempts >= 3:
-                logging.info(f"{URL[0]} Failed")
+                logger.info(f"{URL[0]} Failed")
                 raise ValueError("Failed run.")
 
 driver.close()
-logging.info('Script completed at %s', datetime.datetime.now())
+logger.info('Script completed at %s', datetime.datetime.now())

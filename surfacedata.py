@@ -5,8 +5,9 @@ from reference import MODS, COLUMNS, start_logging, price_df_norm
 import datetime
 import logging
 
-start_logging('./info_log/surfacedata.txt')
-logging.info('Script started at %s', datetime.datetime.now())
+start_logging('./info_log/surfacedata.log', __name__)
+logger = logging.getLogger(__name__)
+logger.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
@@ -54,6 +55,6 @@ for Output in Files:
     details = sh.worksheet("details")
     details.update('B1', last_line)
 
-    logging.info(str(Output[1])+" Updated")
+    logger.info(str(Output[1])+" Updated")
     
-logging.info('Script completed at %s', datetime.datetime.now())
+logger.info('Script completed at %s', datetime.datetime.now())

@@ -7,8 +7,9 @@ from reference import MODS, COLUMNS, start_logging, price_df_norm
 import datetime
 import logging
 
-start_logging('./info_log/matching_mods.txt')
-logging.info('Script started at %s', datetime.datetime.now())
+start_logging('./info_log/matching_mods.log', __name__)
+logger = logging.getLogger(__name__)
+logger.info('Script started at %s', datetime.datetime.now())
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
@@ -28,8 +29,8 @@ for Output in Files:
     
     if os.path.exists(filepath):
         os.remove(filepath)
-        logging.info("Outdated file removed")
-    logging.info("Creating new file") 
+        logger.info("Outdated file removed")
+    logger.info("Creating new file") 
 
     combination_data = price_df_norm(combination_data)
     combination_data["ROF"] = ((combination_data["ROF"] - 1) * 100).abs()
@@ -37,12 +38,12 @@ for Output in Files:
 
     combination_data_list = list(data["ID"])
     combination_data_list = combination_data_list
-    logging.info("combination_data list created")
+    logger.info("combination_data list created")
     combination_data_list2 = list(combinations(combination_data_list, (4)))
         
     size = 3000000
     chunked_list = list(chunked(combination_data_list2, size))
-    logging.info(f"chunked_list size: {size}")
+    logger.info(f"chunked_list size: {size}")
 
     data = data.astype({
         "Damage": float,
@@ -95,8 +96,8 @@ for Output in Files:
   
         report3.to_csv(filepath, mode='a', index=False, header=False)
         chunkcount = chunkcount+1
-        logging.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
+        logger.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
         
-    logging.info(f"All {Output[0]} chunks saved.")
+    logger.info(f"All {Output[0]} chunks saved.")
     
-logging.info('Script completed at %s', datetime.datetime.now())
+logger.info('Script completed at %s', datetime.datetime.now())

@@ -8,15 +8,23 @@ MODS = [
 
 COLUMNS = [0,1,2,3, "TotalDamage", "TotalROF", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]
 
-def start_logging(path: str = None):
-    return logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(path, mode='w'),
-        logging.StreamHandler()  # Add this line to enable logging to console
-    ]
-)
+def start_logging(log_file, logger_name):
+    logger = logging.getLogger(logger_name)
+
+    if not logger.handlers:
+        logger.setLevel(logging.INFO)
+
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+        file_handler = logging.FileHandler(log_file, mode='w')
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        # Stream handler (outputs to console)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(stream_handler)
+        
+
 
 def price_norm(row):
         if "billion" in row["Unit"]:
