@@ -6,7 +6,7 @@ MODS = [
     ['GyroStab', 'Market GyroStabs','49730']
     ] 
 
-COLUMNS = [0,1,2,3, "TotalDamage", "TotalROF", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]
+COLUMNS = [0,1,2,3, "DPS", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]
 
 def start_logging(log_file, logger_name):
     logger = logging.getLogger(logger_name)
