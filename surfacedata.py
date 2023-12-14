@@ -36,16 +36,13 @@ for Output in Files:
     contract_agg = contract_agg.rename(columns={"Price": "TotalPrice"})
     report3["Contract"] = report3["Contract"].astype(str)
     report3 = pd.concat([report3, contract_agg], axis=1)
-    report3 = report3.sort_values(by=["TotalPrice", 'TotalDamage', "TotalROF"], ascending=True).iloc[:2000]
+    report3 = report3.sort_values(by=["TotalPrice", 'Total Damage'], ascending=True).iloc[:3000]
 
     gc = gspread.oauth()
     sh = gc.open(Output[1])
 
     outputsheet = sh.worksheet("output")
-
-    if len(report3) < 2000:
-        outputsheet.clear()
-
+    outputsheet.clear()
     outputsheet.update([report3.columns.values.tolist()] + report3.values.tolist())
 
     with open('./log/' + str(Output[0]) + '.txt', 'r') as f:
