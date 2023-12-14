@@ -53,7 +53,7 @@ SHIPS = {"HeatSink":
                 ,"Large Projectitle Turret": 1.25
                 ,"Surgical Strike": 1.15
                 ,"Large Autocannon Spec": 1.1
-                ,"Minmatar Battleship" : 1.38
+                ,"Minmatar Battleship" : 1.375
                 ,"LP-1006": 1.06
                 }
             ,"rof": {

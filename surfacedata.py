@@ -33,10 +33,10 @@ for Output in Files:
     contract_agg = pd.merge(contract_agg, contract_data, on="Contract", how='left')
     contract_agg["index"] = contract_agg["index"].astype(int)
     contract_agg = contract_agg.groupby("index").agg({"Price":"sum"})
-    contract_agg = contract_agg.rename(columns={"Price": "TotalPrice"})
+    contract_agg = contract_agg.rename(columns={"Price": "Total Price"})
     report3["Contract"] = report3["Contract"].astype(str)
     report3 = pd.concat([report3, contract_agg], axis=1)
-    report3 = report3.sort_values(by=["TotalPrice", 'Total Damage'], ascending=True).iloc[:3000]
+    report3 = report3.sort_values(by=["Total Price", 'Total Damage'], ascending=True).iloc[:3000]
 
     gc = gspread.oauth()
     sh = gc.open(Output[1])
