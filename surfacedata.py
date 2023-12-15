@@ -20,6 +20,7 @@ else:
     Files = MODS
     
 for Output in Files:
+    logger.info(f"Loading file: {Output[0]}")
     data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
     data = price_df_norm(data)
 
@@ -34,9 +35,11 @@ for Output in Files:
     contract_agg["index"] = contract_agg["index"].astype(int)
     contract_agg = contract_agg.groupby("index").agg({"Price":"sum"})
     contract_agg = contract_agg.rename(columns={"Price": "Total Price"})
+    logger.info(f"Price Total calculated: {Output[0]}")
     report3["Contract"] = report3["Contract"].astype(str)
     report3 = pd.concat([report3, contract_agg], axis=1)
     report3 = report3.sort_values(by=["Total Price", 'Total Damage'], ascending=True).iloc[:3000]
+    logger.info(f"Sort completed: {Output[0]}")
 
     gc = gspread.oauth()
     sh = gc.open(Output[1])
@@ -52,6 +55,6 @@ for Output in Files:
     details = sh.worksheet("details")
     details.update('B1', last_line)
 
-    logger.info(str(Output[1])+" Updated")
+    logger.info(f"Google Sheet updated: {Output[0]}")
     
 logger.info('Script completed at %s', datetime.datetime.now())

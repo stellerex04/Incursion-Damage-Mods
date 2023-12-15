@@ -7,6 +7,7 @@ import datetime
 import logging
 import math
 from reference import MODS, COLUMNS, SHIPS, start_logging, price_df_norm
+from pathlib import Path
 
 start_logging('./info_log/matching_mods.log', __name__)
 logger = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ stacking_penalty_4 = stacking_penalty(4)
 
 for Output in Files:
     combination_data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
-    filepath = "./sets/"+ Output[0] +"_sets.csv"
+    filepath = "./sets/"+ Output[0] +"_sets.parquet"
     
     if os.path.exists(filepath):
         os.remove(filepath)
@@ -44,8 +45,7 @@ for Output in Files:
     logger.info("Creating new file") 
 
     combination_data = price_df_norm(combination_data)
-    # combination_data["ROF"] = ((combination_data["ROF"] - 1) * 100).abs()
-    data = combination_data[(combination_data["DPS"] >= 26) & (combination_data["Price"] <= 1000000000)]
+    data = combination_data[(combination_data["DPS"] >= 25) & (combination_data["Price"] <= 1000000000)]
 
     combination_data_list = list(data["ID"])
     combination_data_list = combination_data_list
@@ -117,8 +117,13 @@ for Output in Files:
             # Kronos
             data3 = data3[(data3["Total Damage"] >= 4100)].copy()
 
-        data3 = data3[COLUMNS]    
-        data3.to_csv(filepath, mode='a', index=False, header=False)
+        data3 = data3.rename(columns={0:"MOD1", 1:"MOD2", 2:"MOD3", 3:"MOD4"})[COLUMNS]
+        file_path = Path(filepath)
+        if file_path.exists():
+            data3.to_parquet(file_path, engine='fastparquet', append=True)
+        else:
+            data3.to_parquet(file_path, engine='fastparquet')
+            
         chunkcount = chunkcount+1
         logger.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
         

@@ -1,9 +1,11 @@
 # Custom
-log/*.txt
-sets/*.csv
-webcrawler/*.csv
+log/*
+sets/*
+webcrawler/*
 info_log/*
 api_database/*
+*.ipynb
+*.ipynb_checkpoints
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

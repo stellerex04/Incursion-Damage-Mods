@@ -66,7 +66,7 @@ SHIPS = {"HeatSink":
             }
     }
 
-COLUMNS = [0,1,2,3, "Total Damage", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]
+COLUMNS = ["MOD1","MOD2","MOD3","MOD4", "Total Damage", "TotalCPU", "Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]
 
 def start_logging(log_file, logger_name):
     logger = logging.getLogger(logger_name)
