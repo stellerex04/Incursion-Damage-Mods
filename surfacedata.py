@@ -25,7 +25,7 @@ for Output in Files:
     data = price_df_norm(data)
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
-    report3 = pd.read_csv("./sets/"+ Output[0] +"_sets.csv",names = COLUMNS)
+    report3 = pd.read_parquet(f"./sets/{Output[0]}_sets.parquet")
     report3['Contract'] = report3[["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]].values.tolist()
     report3 = report3.drop(columns=["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"])
 

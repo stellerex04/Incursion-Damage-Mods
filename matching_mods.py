@@ -118,11 +118,11 @@ for Output in Files:
             data3 = data3[(data3["Total Damage"] >= 4100)].copy()
 
         data3 = data3.rename(columns={0:"MOD1", 1:"MOD2", 2:"MOD3", 3:"MOD4"})[COLUMNS]
-        file_path = Path(filepath)
-        if file_path.exists():
-            data3.to_parquet(file_path, engine='fastparquet', append=True)
+
+        if os.path.exists(filepath):
+            data3.to_parquet(filepath, engine='fastparquet', append=True, index=False)
         else:
-            data3.to_parquet(file_path, engine='fastparquet')
+            data3.to_parquet(filepath, engine='fastparquet', index=False)
             
         chunkcount = chunkcount+1
         logger.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
