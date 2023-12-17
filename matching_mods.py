@@ -11,20 +11,8 @@ from pathlib import Path
 
 start_logging('./info_log/matching_mods.log', __name__)
 logger = logging.getLogger(__name__)
-logger.info('Script started at %s', datetime.datetime.now())
-
-if len(sys.argv) > 1:
-    if sys.argv[1] == "HeatSink":
-        Files = [MODS[0]]
-    elif sys.argv[1] == "MagStab":
-        Files = [MODS[1]]
-    elif sys.argv[1] == "GyroStab":
-        Files = [MODS[2]]
-else:
-    Files = MODS
 
 chunkcount = 0
-
 
 def stacking_penalty(u):
     result = math.exp(-(u/2.67)**2)
@@ -35,22 +23,23 @@ stacking_penalty_2 = stacking_penalty(2)
 stacking_penalty_3 = stacking_penalty(3)
 stacking_penalty_4 = stacking_penalty(4)
 
-for Output in Files:
-    combination_data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
-    filepath = "./sets/"+ Output[0] +"_sets.parquet"
-    
+def matching_mods(mod_dict, set_size: int, min_percent: int = 27, max_price: int = 1000000000):
+
+    logger.info('Script started at %s', datetime.datetime.now())
+    combination_data = pd.read_csv(f".\webcrawler\{mod_dict[0]}Output.csv") 
+    filepath = f"./sets/{mod_dict[0]}_{set_size}.parquet"
+
     if os.path.exists(filepath):
         os.remove(filepath)
         logger.info("Outdated file removed")
-    logger.info("Creating new file") 
+    logger.info(f"Creating new file: {filepath}") 
 
     combination_data = price_df_norm(combination_data)
-    data = combination_data[(combination_data["DPS"] >= 25) & (combination_data["Price"] <= 1000000000)]
+    data = combination_data[(combination_data["DPS"] >= min_percent) & (combination_data["Price"] <= max_price)]
 
     combination_data_list = list(data["ID"])
-    combination_data_list = combination_data_list
     logger.info("combination_data list created")
-    combination_data_list2 = list(combinations(combination_data_list, (4)))
+    combination_data_list2 = list(combinations(combination_data_list, (set_size)))
         
     size = 3000000
     chunked_list = list(chunked(combination_data_list2, size))
@@ -63,70 +52,80 @@ for Output in Files:
         "Contract": str
         })
 
-    data = data[["ID", "CPU", 'Damage', 'ROF', "DPS", "Contract"]]
+    data = data[["ID", "CPU", 'Damage', 'ROF', "Contract"]]
 
-    ship_stats = SHIPS[Output[0]]
-    for ship in ship_stats:
-        dps = 1.0
-        rof = 1.0
-        for key, value in ship_stats["damage"].items():
-            dps = dps * ship_stats["damage"][key]
+    ship_stats = SHIPS[mod_dict[0]]
+    dps = 1.0
+    rof = 1.0
+    for key, value in ship_stats["damage"].items():
+        dps = dps * ship_stats["damage"][key]
 
-        for key, value in ship_stats["rof"].items():
-            rof = rof * ship_stats["rof"][key]
+    for key, value in ship_stats["rof"].items():
+        rof = rof * ship_stats["rof"][key]
 
     chunkcount = 0
     for chunk in chunked_list:
         df = pd.DataFrame(chunk)
-
-        data2 = df.merge(data.add_suffix('_first'), left_on=0,right_on="ID_first",how="left")
-        data2 = data2.merge(data.add_suffix('_second'), left_on=1,right_on="ID_second",how="left")
-        data2 = data2.merge(data.add_suffix('_third'), left_on=2,right_on="ID_third",how="left")
-        data2 = data2.merge(data.add_suffix('_fourth'), left_on=3,right_on="ID_fourth",how="left")
-
-        data2damage = data2[["Damage_first","Damage_second","Damage_third","Damage_fourth"]]
+        mod_cols = df.columns
+        damage_cols = []
+        rof_cols = []
+        
+        for col in mod_cols:
+            df = df.merge(data.add_suffix(f"_{col}"), left_on=col, right_on=f"ID_{col}",how="left")
+            damage_cols.append(f"Damage_{col}")
+            rof_cols.append(f"ROF_{col}")
+        
+        data2damage = df[damage_cols]
         data2damage = data2damage.rank(method="first", axis=1, ascending=False)
         data2damage = data2damage.replace({2:stacking_penalty_1, 3:stacking_penalty_2, 4:stacking_penalty_3})
 
-        data2rof = data2[["ROF_first","ROF_second","ROF_third","ROF_fourth"]]
+        data2rof = df[rof_cols]
         data2rof = data2rof.rank(method="first", axis=1, ascending=True)
         data2rof = data2rof.replace({1:stacking_penalty_1, 2:stacking_penalty_2, 3:stacking_penalty_3, 4:stacking_penalty_4})
-
-        data3 = data2.merge(data2damage.add_suffix('_damagaPenalty'),how="left",left_index=True, right_index=True)
-        data3 = data3.merge(data2rof.add_suffix('_rofPenalty'),how="left",left_index=True, right_index=True)
-        data3["raw_damage"] = dps
-        for col in ["Damage_first", "Damage_second", "Damage_third", "Damage_fourth"]:
-            data3[col] = ((data3[col] - 1) * data3[f"{col}_damagaPenalty"]) + 1 
-            data3["raw_damage"] = data3["raw_damage"] * data3[col]
-
-        data3["raw_rof"] = rof
-        for col in ["ROF_first","ROF_second","ROF_third","ROF_fourth"]:
-            data3[col] = 1 - ((1 - data3[col]) * data3[f"{col}_rofPenalty"])
-            data3["raw_rof"] = data3["raw_rof"] * data3[col]
-
-        data3["Total Damage"] = ((data3["raw_damage"] * 4) / (data3["raw_rof"]/1000)) * 2
-        data3["TotalCPU"] = data3["CPU_first"] + data3["CPU_second"] + data3["CPU_third"] + data3["CPU_fourth"] 
         
-        if Output[1] == "Market HeatSinks":       
-            # Paladin
-            data3 = data3[(data3["Total Damage"] >= 3350)].copy()
-        elif Output[1] == "Market GyroStabs": 
-            # Vargur 
-            data3 = data3[(data3["Total Damage"] >= 3350)].copy()
-        elif Output[1] == "Market MagStabs": 
-            # Kronos
-            data3 = data3[(data3["Total Damage"] >= 4100)].copy()
+        df = df.merge(data2damage.add_suffix('_damagaPenalty'), how="left", left_index=True, right_index=True)
+        df = df.merge(data2rof.add_suffix('_rofPenalty'), how="left", left_index=True, right_index=True)
+        
+        df["raw_damage"] = dps
+        for col in damage_cols:
+            df[col] = ((df[col] - 1) * df[f"{col}_damagaPenalty"]) + 1 
+            df["raw_damage"] = df["raw_damage"] * df[col]
 
-        data3 = data3.rename(columns={0:"MOD1", 1:"MOD2", 2:"MOD3", 3:"MOD4"})[COLUMNS]
+        df["raw_rof"] = rof
+        for col in rof_cols:
+            df[col] = 1 - ((1 - df[col]) * df[f"{col}_rofPenalty"])
+            df["raw_rof"] = df["raw_rof"] * df[col]
+
+        df["Total Damage"] = ((df["raw_damage"] * 4) / (df["raw_rof"]/1000)) * 2
+        
+        df["Total CPU"] = 0
+        for col in mod_cols:
+            df["Total CPU"] = df["Total CPU"] + df[f"CPU_{col}"]
+
+        if mod_dict[0] == "HeatSink":       
+            df = df[(df["Total Damage"] >= 3350)]
+        elif mod_dict[0] == "GyroStab": 
+            df = df[(df["Total Damage"] >= 3350)]
+        elif (mod_dict[0] == "MagStab") & (set_size == 4):
+            df = df[(df["Total Damage"] >= 4100)]
+        elif (mod_dict[0] == "MagStab") & (set_size == 3): 
+            df = df[(df["Total Damage"] >= 3900)]
+        else:
+            raise ValueError()
+
+        for col in mod_cols:
+            df.rename(columns={col: f"MOD{col + 1}"}, inplace=True)
+        
+        df = df.filter(regex='Total Damage|Total CPU|MOD*|Contract_*')
 
         if os.path.exists(filepath):
-            data3.to_parquet(filepath, engine='fastparquet', append=True, index=False)
+            df.to_parquet(filepath, engine='fastparquet', append=True, index=False)
         else:
-            data3.to_parquet(filepath, engine='fastparquet', index=False)
+            df.to_parquet(filepath, engine='fastparquet', index=False)
             
         chunkcount = chunkcount+1
-        logger.info(f"{Output[0]} chunk " + str(chunkcount) + " saved.")    
+        logger.info(f"{mod_dict[0]} chunk " + str(chunkcount) + " saved.")    
         
-    logger.info(f"All {Output[0]} chunks saved.")
-    
-logger.info('Script completed at %s', datetime.datetime.now())
+    logger.info(f"All {mod_dict[0]} chunks saved.")
+
+    logger.info('Script completed at %s', datetime.datetime.now())

@@ -19,15 +19,17 @@ if len(sys.argv) > 1:
 else:
     Files = MODS
     
-for Output in Files:
+
+def surface_data(Output, set_size: int):
     logger.info(f"Loading file: {Output[0]}")
     data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
     data = price_df_norm(data)
 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
-    report3 = pd.read_parquet(f"./sets/{Output[0]}_sets.parquet")
-    report3['Contract'] = report3[["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"]].values.tolist()
-    report3 = report3.drop(columns=["Contract_first", "Contract_second", "Contract_third", "Contract_fourth"])
+    report3 = pd.read_parquet(f"./sets/{Output[0]}_{set_size}.parquet")
+    report3['Contract'] = report3.filter(regex='Contract_*').values.tolist()
+    filtered_columns = report3.columns[~report3.columns.str.contains("Contract_")]
+    report3 = report3[filtered_columns]
 
     contract_agg = report3['Contract'].explode()
     contract_agg = contract_agg.reset_index().drop_duplicates(subset=['index','Contract']).astype({"Contract": str})
@@ -40,11 +42,11 @@ for Output in Files:
     report3 = pd.concat([report3, contract_agg], axis=1)
     report3 = report3.sort_values(by=["Total Price", 'Total Damage'], ascending=True).iloc[:3000]
     logger.info(f"Sort completed: {Output[0]}")
-
+    
     gc = gspread.oauth()
     sh = gc.open(Output[1])
 
-    outputsheet = sh.worksheet("output")
+    outputsheet = sh.worksheet(f"{set_size} Set")
     outputsheet.clear()
     outputsheet.update([report3.columns.values.tolist()] + report3.values.tolist())
 
@@ -57,4 +59,4 @@ for Output in Files:
 
     logger.info(f"Google Sheet updated: {Output[0]}")
     
-logger.info('Script completed at %s', datetime.datetime.now())
+    logger.info('Script completed at %s', datetime.datetime.now())
