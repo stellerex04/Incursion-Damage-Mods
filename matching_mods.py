@@ -1,18 +1,15 @@
 import pandas as pd
 from itertools import combinations
-import sys
 from more_itertools import chunked
 import os
 import datetime
 import logging
 import math
-from reference import MODS, COLUMNS, SHIPS, start_logging, price_df_norm
-from pathlib import Path
+from reference import SHIPS, start_logging, price_df_norm
+import gspread
 
 start_logging('./info_log/matching_mods.log', __name__)
 logger = logging.getLogger(__name__)
-
-chunkcount = 0
 
 def stacking_penalty(u):
     result = math.exp(-(u/2.67)**2)
@@ -23,19 +20,38 @@ stacking_penalty_2 = stacking_penalty(2)
 stacking_penalty_3 = stacking_penalty(3)
 stacking_penalty_4 = stacking_penalty(4)
 
-def matching_mods(mod_dict, set_size: int, min_percent: int = 27, max_price: int = 1000000000):
+def matching_mods(mod_dict, set_size: int, min_percent: int = None, max_price: int = None, personal: str = None):
 
     logger.info('Script started at %s', datetime.datetime.now())
     combination_data = pd.read_csv(f".\webcrawler\{mod_dict[0]}Output.csv") 
-    filepath = f"./sets/{mod_dict[0]}_{set_size}.parquet"
+    filepath = f"./sets/{mod_dict[0]}_{set_size}"
+
+    data = price_df_norm(combination_data)
+    if min_percent:
+        data = data[data["DPS"] >= min_percent]
+        filepath = filepath + f"_DPS_{min_percent}"
+
+    if max_price:
+        data = data[data["Price"] <= max_price]
+        filepath = filepath + f"_PRICE_{max_price}"
+
+    if personal:
+        logging.info("Personal Mods Found")
+        filepath = f"./sets/{mod_dict[0]}_{set_size}_{personal}"
+        gc = gspread.oauth()
+        sh = gc.open_by_key(personal)
+        inputsheet = sh.worksheet("input")
+        inputdf = pd.DataFrame(inputsheet.get_all_records())
+        inputdf_list = list(inputdf["ID"])
+        data = pd.concat([data, inputdf[data.columns]], ignore_index=True)
+        
+    else:
+        logging.info("No Personal Mods Found")
 
     if os.path.exists(filepath):
         os.remove(filepath)
         logger.info("Outdated file removed")
     logger.info(f"Creating new file: {filepath}") 
-
-    combination_data = price_df_norm(combination_data)
-    data = combination_data[(combination_data["DPS"] >= min_percent) & (combination_data["Price"] <= max_price)]
 
     combination_data_list = list(data["ID"])
     logger.info("combination_data list created")
@@ -62,14 +78,12 @@ def matching_mods(mod_dict, set_size: int, min_percent: int = 27, max_price: int
 
     for key, value in ship_stats["rof"].items():
         rof = rof * ship_stats["rof"][key]
-
     chunkcount = 0
     for chunk in chunked_list:
         df = pd.DataFrame(chunk)
         mod_cols = df.columns
         damage_cols = []
         rof_cols = []
-        
         for col in mod_cols:
             df = df.merge(data.add_suffix(f"_{col}"), left_on=col, right_on=f"ID_{col}",how="left")
             damage_cols.append(f"Damage_{col}")
@@ -119,9 +133,9 @@ def matching_mods(mod_dict, set_size: int, min_percent: int = 27, max_price: int
         df = df.filter(regex='Total Damage|Total CPU|MOD*|Contract_*')
 
         if os.path.exists(filepath):
-            df.to_parquet(filepath, engine='fastparquet', append=True, index=False)
+            df.to_parquet(f"{filepath}.parquet", engine='fastparquet', append=True, index=False)
         else:
-            df.to_parquet(filepath, engine='fastparquet', index=False)
+            df.to_parquet(f"{filepath}.parquet", engine='fastparquet', index=False)
             
         chunkcount = chunkcount+1
         logger.info(f"{mod_dict[0]} chunk " + str(chunkcount) + " saved.")    
