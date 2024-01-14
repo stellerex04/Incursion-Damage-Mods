@@ -78,12 +78,15 @@ for URL in URLs:
             while True:
                 try:
                     # driver.implicitly_wait(60)
-                    WebDriverWait(driver,60).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[6]/div/div/div/table/tbody/tr[1]/td[2]')))
-                    rows = WebDriverWait(driver,10).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[6]/div/div/div/table/tbody')))
+                    WebDriverWait(driver,60).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div/table/tbody/tr[1]/td[1]')))
+                    rows = WebDriverWait(driver,10).until(EC.visibility_of_all_elements_located((By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div/table/tbody')))
                     for row in rows:
                         Data.append(row.get_attribute('outerHTML'))
-                    driver.execute_script("return arguments[0].scrollIntoView(true);", WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH,'//*[@class="paginate_button next"]' ))))
-                    nextlink = driver.find_element(By.XPATH,'//*[@class="paginate_button next"]')
+                        Data.append(row.get_attribute('outerHTML'))
+                    driver.execute_script("return arguments[0].scrollIntoView(true);", WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="module-table_next"]' ))))
+                    nextlink = driver.find_element(By.XPATH,'//*[@id="module-table_next"]')
+                    if nextlink.get_attribute("class") == 'paginate_button page-item next disabled':
+                        raise WebDriverException()
                     driver.execute_script("arguments[0].click();", nextlink)
                     page = page + 1
                     logger.info(f"{URL[0]} WebCrawl: Navigating to Page {page}")
