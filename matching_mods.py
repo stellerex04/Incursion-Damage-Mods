@@ -30,10 +30,12 @@ def matching_mods(mod_dict, set_size: int, min_percent: int = None, max_price: i
     if min_percent:
         data = data[data["DPS"] >= min_percent]
         filepath = filepath + f"_DPS_{min_percent}"
+        logger.info(f"DPS Filter. Mods Remaining: {len(data)}")
 
     if max_price:
         data = data[data["Price"] <= max_price]
         filepath = filepath + f"_PRICE_{max_price}"
+        logger.info(f"Price Filter. Mods Remaining: {len(data)}")
 
     if personal:
         logging.info("Personal Mods Found")
@@ -87,8 +89,7 @@ def matching_mods(mod_dict, set_size: int, min_percent: int = None, max_price: i
         for col in mod_cols:
             df = df.merge(data.add_suffix(f"_{col}"), left_on=col, right_on=f"ID_{col}",how="left")
             damage_cols.append(f"Damage_{col}")
-            rof_cols.append(f"ROF_{col}")
-        
+            rof_cols.append(f"ROF_{col}")     
         data2damage = df[damage_cols]
         data2damage = data2damage.rank(method="first", axis=1, ascending=False)
         data2damage = data2damage.replace({2:stacking_penalty_1, 3:stacking_penalty_2, 4:stacking_penalty_3})

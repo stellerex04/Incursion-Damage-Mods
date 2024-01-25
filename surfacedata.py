@@ -18,7 +18,7 @@ def surface_data(Output, set_size: int, targets: list(), personal: str = None):
 
     logger.info(f"Loading file: {Output[0]}")
     data = pd.read_csv(f".\webcrawler\{Output[0]}_api_output.csv") 
-    contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
+    contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first").astype({"Contract": str})
 
     for target in targets:
         report3 = pd.read_parquet(f"./sets/{filename}{target[1]}.parquet")

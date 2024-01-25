@@ -11,6 +11,7 @@ start_logging('./info_log/webcrawl.log', __name__)
 logger = logging.getLogger(__name__)
 logger.info('Script started at %s', datetime.datetime.now())
 
+mods = MODS
 if len(sys.argv) > 1:
     if sys.argv[1] == "HeatSink":
         mods = [MODS[0]]
@@ -31,15 +32,15 @@ for mod in mods:
             df = pd.DataFrame(json.loads(response.text))
             df2=df
             df2["ID"] = f"https://mutaplasmid.space/module/" + df2['id'].astype(str) + "/"
-            df2 = df2[(df2["static"] == False) & (df2["contract"].notna())]
+            df2 = df2[df2["static"] == False]
             attributes = pd.json_normalize(df2["attributes"])[[
-                '204.real_value', 
-                '64.real_value',  
+                '204.real_value',
+                '64.real_value', 
                 '50.real_value', 
                 '100004.real_value'
                 ]].rename(columns={
-                '204.real_value': "Damage", 
-                '64.real_value': "ROF",
+                '204.real_value': "ROF", 
+                '64.real_value': "Damage",
                 '50.real_value': "CPU",
                 '100004.real_value': "DPS"
                 })
@@ -47,9 +48,12 @@ for mod in mods:
             df2 = pd.concat([df2.drop(columns=["attributes"]),attributes], axis=1)
             price = pd.json_normalize(df2["contract"])[["id", "price.plex", "price.isk","auction","multi_item"]].rename(columns={"id":"Contract"}).astype({"price.plex":"float64", "price.isk": "float64"})
             price = price[price["auction"] == False]
-            price["Price"] = (price["price.isk"] + (price["price.plex"]* 5100000)).astype("int64")
+            price["Price"] = (price["price.isk"] + (price["price.plex"]* 5100000))
             df2 = pd.concat([df2.drop(columns=["contract"]),price.drop(columns=["price.plex", "price.isk"])], axis=1)
             df2 = df2.drop(columns=["type_id","price_prediction","price_prediction_date","module_name","static"])
+            df2 = df2[df2["Contract"].notna()]
+            df2["Contract"] = df2["Contract"].astype("int").astype("str")
+            df2["Price"] = df2["Price"].astype("int64")
             df2.to_csv("./webcrawler/" + str(mod[0]) + "_api_output.csv",index=False)
             logger.info(f"{mod[0]} Saved")
             
