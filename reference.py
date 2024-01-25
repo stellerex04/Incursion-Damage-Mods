@@ -1,10 +1,11 @@
 import logging
 
 MODS = [
-    ['HeatSink', 'Market HeatSinks','49726'],
-    ['MagStab', 'Market MagStabs','49722'],
-    ['GyroStab', 'Market GyroStabs','49730']
+    ['HeatSink', 'Market HeatSinks','49726','1703643940268'],
+    ['MagStab', 'Market MagStabs','49722', '1703644236343'],
+    ['GyroStab', 'Market GyroStabs','49730','1703644335797']
     ] 
+
 
 
 SHIPS = {"HeatSink":
@@ -86,20 +87,20 @@ def start_logging(log_file, logger_name):
         
 
 
-def price_norm(row):
-        if "billion" in row["Unit"]:
-            return row["Price"] * 1000000000
-        elif "million" in row["Unit"]:
-            return row["Price"] * 1000000 
-        elif "plex" in row["Unit"]:
-            return row["Price"] * 5100000
-        else:
-            return row["Price"]
+# def price_norm(row):
+#         if "billion" in row["Unit"]:
+#             return row["Price"] * 1000000000
+#         elif "million" in row["Unit"]:
+#             return row["Price"] * 1000000 
+#         elif "plex" in row["Unit"]:
+#             return row["Price"] * 5100000
+#         else:
+#             return row["Price"]
         
-def price_df_norm(df):
-    df["Price"] = df["Price"].astype("float64")
-    df["Unit"] = df["Unit"].fillna("plex")
-    df["Contract"] = df["Contract"].astype(str)
-    df['Price'] = df.apply(lambda row: price_norm(row), axis=1)
-    df["Price"] = df["Price"].astype("int64")
-    return df
+# def price_df_norm(df):
+#     df["Price"] = df["Price"].astype("float64")
+#     df["Unit"] = df["Unit"].fillna("plex")
+#     df["Contract"] = df["Contract"].astype(str)
+#     df['Price'] = df.apply(lambda row: price_norm(row), axis=1)
+#     df["Price"] = df["Price"].astype("int64")
+#     return df

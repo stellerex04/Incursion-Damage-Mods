@@ -5,7 +5,7 @@ import os
 import datetime
 import logging
 import math
-from reference import SHIPS, start_logging, price_df_norm
+from reference import SHIPS, start_logging
 import gspread
 
 start_logging('./info_log/matching_mods.log', __name__)
@@ -23,10 +23,10 @@ stacking_penalty_4 = stacking_penalty(4)
 def matching_mods(mod_dict, set_size: int, min_percent: int = None, max_price: int = None, personal: str = None):
 
     logger.info('Script started at %s', datetime.datetime.now())
-    combination_data = pd.read_csv(f".\webcrawler\{mod_dict[0]}Output.csv") 
+    data = pd.read_csv(f".\webcrawler\{mod_dict[0]}_api_output.csv") 
     filepath = f"./sets/{mod_dict[0]}_{set_size}"
-
-    data = price_df_norm(combination_data)
+   
+    # data = price_df_norm(combination_data)
     if min_percent:
         data = data[data["DPS"] >= min_percent]
         filepath = filepath + f"_DPS_{min_percent}"

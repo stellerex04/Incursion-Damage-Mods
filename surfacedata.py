@@ -1,7 +1,7 @@
 import pandas as pd
 import gspread
 import sys
-from reference import MODS, COLUMNS, start_logging, price_df_norm
+from reference import start_logging
 import datetime
 import logging
 
@@ -16,12 +16,8 @@ def surface_data(Output, set_size: int, targets: list(), personal: str = None):
     else:
         filename = f"{Output[0]}_{set_size}"
 
-
-    
     logger.info(f"Loading file: {Output[0]}")
-    data = pd.read_csv(f".\webcrawler\{Output[0]}Output.csv") 
-    data = price_df_norm(data)
-
+    data = pd.read_csv(f".\webcrawler\{Output[0]}_api_output.csv") 
     contract_data = data[["Contract", "Price"]].drop_duplicates(subset=["Contract"],keep="first")
 
     for target in targets:
@@ -64,10 +60,12 @@ def surface_data(Output, set_size: int, targets: list(), personal: str = None):
                 
             outputsheet.clear()
             outputsheet.update([output_report.columns.values.tolist()] + output_report.values.tolist())
+            
             if set_size == 3:
                 format_col = "G"
             else:
                 format_col = "H"
+
             outputsheet.format(format_col, { "numberFormat": { "type": "NUMBER","pattern": "#,##0" }})
 
             # TODO  sort and show higher end dps
